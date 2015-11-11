@@ -1,7 +1,16 @@
-#url=http://www.actualidadpanamericana.com/
-url=http://www.dane.gov.co/
-#wget --spider ‐‐server-response -w 1 -r -p "$url"  
-#wget --spider --server-response -r -l 1  "$url" 2>temporal-log
-#awk -f 'data-extractor.awk' temporal-log
-wget --spider --server-response -r -l 1  "$url" 2>&1| awk -f 'data-extractor.awk'
+DEBUGMODE=false;
+OUTPUT="/dev/stdout"
+while getopts "do:" opt; do
+	case $opt in
+		d)	DEBUGMODE=true;;
+		debug)	DEBUGMODE=true;;
+		o)	OUTPUT=$OPTARG;;
+	esac
+done
 
+URL=${!OPTIND}
+if [ "$DEBUGMODE" = true -o "$URL" = "" ]; then
+	wget --spider --server-response -r   "$URL" 2>&1;
+else
+	wget --spider --server-response -r  "$URL" 2>&1| awk -f data-extractor.awk>"$OUTPUT"
+fi
