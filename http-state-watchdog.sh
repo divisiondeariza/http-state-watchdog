@@ -8,9 +8,17 @@ while getopts "do:" opt; do
 	esac
 done
 
+DEFAULT_OPTIONS="--spider\
+		--server-response\
+		--random-wait\
+		-r\
+		-p\
+		-w 2"
+
 URL=${!OPTIND}
+
 if [ "$DEBUGMODE" = true -o "$URL" = "" ]; then
-	wget --spider --server-response -r   "$URL" 2>&1;
+	wget $DEFAULT_OPTIONS "$URL" 2>&1;
 else
-	wget --spider --server-response -r  "$URL" 2>&1| awk -f data-extractor.awk>"$OUTPUT"
+	wget $DEFAULT_OPTIONS "$URL" 2>&1| awk -f data-extractor.awk>"$OUTPUT"
 fi

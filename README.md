@@ -31,4 +31,6 @@ $ cd http-state-watchdog
 $ bash http-state-watchdog.sh -o log.csv www.example.com 
 ```
 
-
+##Note
+It may take a long time for running because it uses wget with wait and random wait options so time between request is randomly distributed between 1 and 3 seconds.
+This in order to avoiding stressing the server and cause a DoS, and also for avoid being automatically detected and restricted for the server.
