@@ -10,9 +10,14 @@ done
 
 DEFAULT_OPTIONS="--spider\
 		--server-response\
+<<<<<<< HEAD
 		--random-wait\
 		-r\
 		-p\
+=======
+		--random-wait
+		-r
+>>>>>>> ce85980d037ce2ddf2871630d4cd858329d467ea
 		-w 2"
 
 URL=${!OPTIND}
